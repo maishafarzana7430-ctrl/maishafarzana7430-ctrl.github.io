@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Maisha Farzana</title>
+  <meta name="description" content="CV of Maisha Farzana — BEng Electrical and Electronic Engineering.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">MF</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="cv.html" class="active">CV</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── PAGE HEADER ── -->
+    <section class="hero" style="padding-bottom:3rem;">
+      <div class="container">
+        <p class="hero-eyebrow">Curriculum Vitae</p>
+        <h1 class="hero-name" style="font-size:clamp(2.5rem,7vw,4.5rem);">
+          Maisha Farzana
+          <span class="hero-name-underline"></span>
+        </h1>
+        <p class="hero-degree" style="margin-top:0.75rem;">
+          maishafarzana7430@gmail.com &nbsp;·&nbsp; +44 7432 276050 &nbsp;·&nbsp;
+          <a href="https://www.linkedin.com/in/maisha-farzana-ab924329b/" target="_blank" rel="noopener"
+             style="color:var(--accent);">LinkedIn</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ── EDUCATION ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Education</h2>
+        <div class="cv-block">
+
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <div class="cv-date">Oct 2023 – May 2026</div>
+              <div class="cv-place">Manchester Metropolitan University</div>
+            </div>
+            <div class="cv-entry-body">
+              <div class="cv-entry-title">BEng Electrical and Electronic Engineering</div>
+              <div class="cv-entry-subtitle">Final grade: 2:1</div>
+              <div class="cv-entry-desc">
+                Modules included power engineering, embedded systems, control engineering,
+                analogue and digital electronics, engineering mathematics, mechanical engineering,
+                and a substantial design project (final-year dissertation).
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── EXPERIENCE ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Experience</h2>
+        <div class="cv-block">
+
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <div class="cv-date">May – Jul 2025</div>
+              <div class="cv-place">BYK Additives</div>
+            </div>
+            <div class="cv-entry-body">
+              <div class="cv-entry-title">Electrical &amp; Automation Engineering Intern</div>
+              <div class="cv-entry-desc">
+                <ul>
+                  <li>Contributed to a Combined Heat and Power (CHP) project to improve plant-wide energy efficiency and sustainability.</li>
+                  <li>Gained practical hands-on experience with Programmable Logic Controllers (PLCs).</li>
+                  <li>Utilised Supervisory Control and Data Acquisition (SCADA) systems for monitoring and control.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <div class="cv-date">Sep 2024 – Present</div>
+              <div class="cv-place">Starbucks</div>
+            </div>
+            <div class="cv-entry-body">
+              <div class="cv-entry-title">Shift Supervisor</div>
+              <div class="cv-entry-desc">
+                Coordinated people, processes, and equipment to deliver reliable service under time pressure.
+                Developed team leadership and operational management skills directly transferable to
+                operations-focused engineering environments.
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <div class="cv-date">Apr – Sep 2024</div>
+              <div class="cv-place">World Duty Free, Manchester Airport</div>
+            </div>
+            <div class="cv-entry-body">
+              <div class="cv-entry-title">Customer Service Assistant</div>
+              <div class="cv-entry-desc">
+                Delivered customer service in a high-footfall retail environment, building communication
+                and people skills applicable to customer-facing engineering roles.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Projects</h2>
+        <div class="cv-block">
+
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <div class="cv-date">2025 – 2026</div>
+              <div class="cv-place">Final-year dissertation</div>
+            </div>
+            <div class="cv-entry-body">
+              <div class="cv-entry-title">An electro-thermal model of temperature rise in Li-ion batteries during fast charging</div>
+              <div class="cv-entry-desc">
+                Designed and implemented a zero-dimensional physics-based model coupling a CC-CV charging
+                protocol to an Arrhenius-type internal resistance and a forward-Euler ODE solver for cell
+                temperature. Computed aging metrics (SEI calendar capacity loss, peak temperature, time above
+                safe threshold) and performed sensitivity analysis over the convective heat transfer coefficient.
+                Written entirely in Python (NumPy).
+              </div>
+              <a href="projects.html" class="cv-badge">Interactive simulation →</a>
+            </div>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <div class="cv-date">2025</div>
+              <div class="cv-place">2nd-year group project</div>
+            </div>
+            <div class="cv-entry-body">
+              <div class="cv-entry-title">Industrial plant for manufacturing ventilators</div>
+              <span class="cv-badge">Award-winning</span>
+              <div class="cv-entry-desc" style="margin-top:0.65rem;">
+                Rapid prototyping of an optimised plant design for ventilator manufacturing, proposed by Siemens
+                and executed using the Siemens Digital Enterprise Suite. Collaborated with a multidisciplinary
+                engineering team.
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <div class="cv-date">2024</div>
+              <div class="cv-place">1st-year project</div>
+            </div>
+            <div class="cv-entry-body">
+              <div class="cv-entry-title">Line-following robot</div>
+              <span class="cv-badge">Award-winning</span>
+              <div class="cv-entry-desc" style="margin-top:0.65rem;">
+                Built a robot using a Raspberry Pi microcontroller and optical sensors. Programmed
+                navigation logic in MicroPython for precise line-tracking, then iterated the design
+                to achieve the best lap time in a competitive event.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SKILLS ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Skills</h2>
+        <div class="skills-grid">
+
+          <div class="skills-group">
+            <div class="skills-group-title">Programming</div>
+            <ul class="skills-list">
+              <li>Python</li>
+              <li>MicroPython</li>
+              <li>MATLAB</li>
+              <li>HTML</li>
+            </ul>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-group-title">Design Software</div>
+            <ul class="skills-list">
+              <li>AutoCAD</li>
+              <li>Fusion 360</li>
+              <li>Multisim</li>
+            </ul>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-group-title">Hardware & Tools</div>
+            <ul class="skills-list">
+              <li>PLC programming</li>
+              <li>SCADA systems</li>
+              <li>Quartus</li>
+              <li>Questa</li>
+            </ul>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-group-title">Soft Skills</div>
+            <ul class="skills-list">
+              <li>Team leadership</li>
+              <li>Problem solving</li>
+              <li>Communication</li>
+              <li>Time management</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-name">Maisha Farzana</span>
+      <ul class="footer-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

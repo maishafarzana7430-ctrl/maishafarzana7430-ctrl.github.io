@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colour Scheme Options — Maisha Farzana Website</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #e8e8e8;
+    padding: 2.5rem;
+    color: #111;
+  }
+
+  h1 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+  }
+
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.15);
+  }
+
+  /* ── mini site mockup ── */
+  .mockup {
+    padding: 1.1rem 1.25rem 1.4rem;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mock-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid;
+    margin-bottom: 0.8rem;
+  }
+
+  .mock-logo {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  .mock-links {
+    display: flex;
+    gap: 0.7rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .mock-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .mock-eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .mock-name {
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+  }
+
+  .mock-role {
+    font-size: 0.65rem;
+    opacity: 0.55;
+    margin-top: 0.15rem;
+  }
+
+  .mock-btn {
+    margin-top: 0.75rem;
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  /* ── colour swatches ── */
+  .swatches {
+    display: flex;
+    height: 48px;
+  }
+
+  .sw {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    font-family: monospace;
+  }
+
+  /* ── label ── */
+  .label {
+    background: #fff;
+    padding: 0.9rem 1.1rem 1rem;
+  }
+
+  .label .name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+
+  .label .desc {
+    font-size: 0.68rem;
+    color: #555;
+    line-height: 1.45;
+  }
+
+  /* ══════════════════════════════════════
+     PALETTE A  —  Blueprint
+     Ground: deep navy  |  Accent: sky blue
+  ══════════════════════════════════════ */
+  .a .mockup            { background: #0c1f3f; color: #e2ecf7; }
+  .a .mock-nav          { border-color: rgba(255,255,255,0.12); }
+  .a .mock-name         { color: #e2ecf7; }
+  .a .mock-btn          { background: #4fb8f5; color: #0c1f3f; }
+
+  /* ══════════════════════════════════════
+     PALETTE B  —  Copper Wire
+     Ground: warm parchment  |  Accent: copper
+  ══════════════════════════════════════ */
+  .b .mockup            { background: #f6f0e6; color: #1c130a; }
+  .b .mock-nav          { border-color: #d5c5ac; }
+  .b .mock-name         { color: #1c130a; }
+  .b .mock-eyebrow      { color: #7a5c42; opacity: 1; }
+  .b .mock-btn          { background: #b5501f; color: #f6f0e6; }
+
+  /* ══════════════════════════════════════
+     PALETTE C  —  Signal
+     Ground: cool off-white  |  Accent: oscilloscope green
+  ══════════════════════════════════════ */
+  .c .mockup            { background: #f2f6f5; color: #1a2d2a; }
+  .c .mock-nav          { border-color: #c5ddd7; }
+  .c .mock-name         { color: #1a2d2a; }
+  .c .mock-eyebrow      { color: #4a8a72; opacity: 1; }
+  .c .mock-btn          { background: #1db87a; color: #fff; }
+
+  /* ══════════════════════════════════════
+     PALETTE D  —  Deep Charge
+     Ground: near-black  |  Accent: amber
+  ══════════════════════════════════════ */
+  .d .mockup            { background: #111720; color: #dde4ef; }
+  .d .mock-nav          { border-color: rgba(255,255,255,0.10); }
+  .d .mock-name         { color: #dde4ef; }
+  .d .mock-btn          { background: #f0b429; color: #111720; }
+</style>
+</head>
+<body>
+
+<h1>Website colour scheme options — pick one</h1>
+
+<div class="grid">
+
+  <!-- ── A: Blueprint ── -->
+  <div class="card a">
+    <div class="mockup">
+      <div class="mock-nav">
+        <span class="mock-logo">MF</span>
+        <div class="mock-links">
+          <span>About</span><span>CV</span><span>Projects</span><span>Contact</span>
+        </div>
+      </div>
+      <div class="mock-hero">
+        <div class="mock-eyebrow">Electrical &amp; Electronic Engineering</div>
+        <div class="mock-name">Maisha<br>Farzana</div>
+        <div class="mock-role">BEng · Manchester Metropolitan University</div>
+        <div class="mock-btn">Download CV</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="sw" style="background:#0c1f3f; color:#4fb8f5;">#0c1f3f</div>
+      <div class="sw" style="background:#1e3a60; color:#7fc9f7;">#1e3a60</div>
+      <div class="sw" style="background:#4fb8f5; color:#0c1f3f;">#4fb8f5</div>
+      <div class="sw" style="background:#e2ecf7; color:#1e3a60;">#e2ecf7</div>
+    </div>
+    <div class="label">
+      <div class="name">A — Blueprint</div>
+      <div class="desc">Deep navy + sky blue. References circuit diagrams and technical drawing. Professional, grounded in the field.</div>
+    </div>
+  </div>
+
+  <!-- ── B: Copper Wire ── -->
+  <div class="card b">
+    <div class="mockup">
+      <div class="mock-nav">
+        <span class="mock-logo">MF</span>
+        <div class="mock-links">
+          <span>About</span><span>CV</span><span>Projects</span><span>Contact</span>
+        </div>
+      </div>
+      <div class="mock-hero">
+        <div class="mock-eyebrow">Electrical &amp; Electronic Engineering</div>
+        <div class="mock-name">Maisha<br>Farzana</div>
+        <div class="mock-role">BEng · Manchester Metropolitan University</div>
+        <div class="mock-btn">Download CV</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="sw" style="background:#f6f0e6; color:#7a5c42;">#f6f0e6</div>
+      <div class="sw" style="background:#d5c5ac; color:#1c130a;">#d5c5ac</div>
+      <div class="sw" style="background:#b5501f; color:#f6f0e6;">#b5501f</div>
+      <div class="sw" style="background:#1c130a; color:#f6f0e6;">#1c130a</div>
+    </div>
+    <div class="label">
+      <div class="name">B — Copper Wire</div>
+      <div class="desc">Warm parchment + copper accent. The material of the field made into a palette. Warm, personal, stands out.</div>
+    </div>
+  </div>
+
+  <!-- ── C: Signal ── -->
+  <div class="card c">
+    <div class="mockup">
+      <div class="mock-nav">
+        <span class="mock-logo">MF</span>
+        <div class="mock-links">
+          <span>About</span><span>CV</span><span>Projects</span><span>Contact</span>
+        </div>
+      </div>
+      <div class="mock-hero">
+        <div class="mock-eyebrow">Electrical &amp; Electronic Engineering</div>
+        <div class="mock-name">Maisha<br>Farzana</div>
+        <div class="mock-role">BEng · Manchester Metropolitan University</div>
+        <div class="mock-btn">Download CV</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="sw" style="background:#f2f6f5; color:#4a8a72;">#f2f6f5</div>
+      <div class="sw" style="background:#c5ddd7; color:#1a2d2a;">#c5ddd7</div>
+      <div class="sw" style="background:#1db87a; color:#fff;">#1db87a</div>
+      <div class="sw" style="background:#1a2d2a; color:#f2f6f5;">#1a2d2a</div>
+    </div>
+    <div class="label">
+      <div class="name">C — Signal</div>
+      <div class="desc">Cool off-white + oscilloscope green. Clean and light. The green is the colour of a status LED or a scope trace.</div>
+    </div>
+  </div>
+
+  <!-- ── D: Deep Charge ── -->
+  <div class="card d">
+    <div class="mockup">
+      <div class="mock-nav">
+        <span class="mock-logo">MF</span>
+        <div class="mock-links">
+          <span>About</span><span>CV</span><span>Projects</span><span>Contact</span>
+        </div>
+      </div>
+      <div class="mock-hero">
+        <div class="mock-eyebrow">Electrical &amp; Electronic Engineering</div>
+        <div class="mock-name">Maisha<br>Farzana</div>
+        <div class="mock-role">BEng · Manchester Metropolitan University</div>
+        <div class="mock-btn">Download CV</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="sw" style="background:#111720; color:#f0b429;">#111720</div>
+      <div class="sw" style="background:#1e2a3a; color:#dde4ef;">#1e2a3a</div>
+      <div class="sw" style="background:#f0b429; color:#111720;">#f0b429</div>
+      <div class="sw" style="background:#dde4ef; color:#111720;">#dde4ef</div>
+    </div>
+    <div class="label">
+      <div class="name">D — Deep Charge</div>
+      <div class="desc">Near-black + amber. The glow of a battery indicator mid-charge. Bold, high contrast, most distinctive.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
