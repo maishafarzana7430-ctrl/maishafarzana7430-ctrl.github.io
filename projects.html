@@ -424,7 +424,7 @@ def run_sweep(h_vals):
           legend:{font:{color:THEME.text},bgcolor:'rgba(0,0,0,0)'} }), { responsive:true });
 
       Plotly.newPlot('plot-temp', [
-        { x: times, y: temps, mode:'lines', line:{color:THEME.accent,width:2} },
+        { x: times, y: temps, mode:'lines', line:{color:THEME.accent,width:2}, showlegend:false },
         { x: [times[0], times[times.length-1]], y:[35,35],
           mode:'lines', line:{color:'#fc8b8b',width:1,dash:'dash'}, name:'35°C threshold' },
       ], plotLayout('Time (min)', 'Temperature (°C)', { showlegend:true,
