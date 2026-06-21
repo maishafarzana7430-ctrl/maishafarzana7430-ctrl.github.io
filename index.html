@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maisha Farzana — Electrical Engineer</title>
+  <meta name="description" content="Electrical and Electronic Engineering graduate seeking roles in power, automation, and embedded systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">MF</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">About</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-eyebrow">Electrical &amp; Electronic Engineering</p>
+        <h1 class="hero-name">
+          Maisha<br>Farzana
+          <span class="hero-name-underline"></span>
+        </h1>
+        <p class="hero-degree">BEng · Manchester Metropolitan University · 2:1</p>
+        <div class="hero-badge-row">
+          <span class="status-badge">
+            <span class="pulse-dot"></span>
+            Open to graduate roles
+          </span>
+        </div>
+        <div class="hero-cta">
+          <a href="cv.html" class="btn btn-primary">View CV</a>
+          <a href="projects.html" class="btn btn-secondary">Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ABOUT ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">About</h2>
+        <div class="about-body">
+          <p>
+            I'm a <strong>BEng Electrical and Electronic Engineering graduate</strong> from Manchester Metropolitan
+            University (2:1), with a strong foundation across power engineering, embedded systems, control theory,
+            and analogue and digital electronics.
+          </p>
+          <p>
+            My final-year dissertation built a <strong>physics-based computer model of a lithium-ion battery
+            under fast charging</strong> — linking charging rate to internal temperature rise and battery aging through
+            a CC-CV current profile, Arrhenius-type resistance, and a forward-Euler ODE solver written in Python.
+            You can explore the simulation interactively on the <a href="projects.html" style="color:var(--accent)">Projects</a> page.
+          </p>
+          <p>
+            Before graduating, I worked as an <strong>Electrical &amp; Automation Engineering Intern at BYK Additives</strong>,
+            gaining hands-on experience with PLCs and SCADA systems on a live Combined Heat and Power project.
+            I also led teams to two <strong>award-winning engineering projects</strong> during my degree — an optimised
+            ventilator manufacturing plant designed with Siemens Digital Enterprise Suite, and a line-following
+            robot built on a Raspberry Pi.
+          </p>
+          <p class="about-hobbies">
+            Outside engineering: weightlifting, hiking, badminton, reading, and journaling.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LOOKING FOR ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Currently seeking</h2>
+        <p style="max-width:580px; color:var(--text-muted); line-height:1.8;">
+          Graduate roles in electrical engineering, automation, power systems, or embedded engineering.
+          I'm open to both industrial and technology-sector positions, and available to start immediately.
+        </p>
+        <div style="margin-top:1.75rem; display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="cv.html" class="btn btn-primary">View full CV</a>
+          <a href="contact.html" class="btn btn-secondary">Get in touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-name">Maisha Farzana</span>
+      <ul class="footer-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
