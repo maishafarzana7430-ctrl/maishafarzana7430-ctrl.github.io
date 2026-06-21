@@ -1,0 +1,6 @@
+PLAN.md
+color_schemes.html
+*.docx
+*.md
+__pycache__/
+.DS_Store
