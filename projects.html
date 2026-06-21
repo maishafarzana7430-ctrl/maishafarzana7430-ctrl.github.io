@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Maisha Farzana</title>
+  <meta name="description" content="Engineering projects including an interactive battery fast-charging simulation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Plotly for charts -->
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">MF</a>
+      <button class="nav-toggle" aria-label="Toggle navigation"
+              onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── PAGE HEADER ── -->
+    <section class="hero" style="padding-bottom:3rem;">
+      <div class="container">
+        <p class="hero-eyebrow">Engineering Work</p>
+        <h1 class="hero-name" style="font-size:clamp(2.5rem,7vw,4.5rem);">
+          Projects
+          <span class="hero-name-underline"></span>
+        </h1>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         DISSERTATION
+    ════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <p style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;">Final-year dissertation · 2025–2026</p>
+        <h2 class="section-heading">
+          An electro-thermal model of temperature rise<br>in Li-ion batteries during fast charging
+        </h2>
+
+        <div style="max-width:660px;">
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;">
+            Fast charging of lithium-ion batteries is widely sought after but accelerates aging through
+            increased internal heat generation. This project builds a transparent, physics-based model
+            that links charging rate to temperature rise and aging — without the complexity of a full
+            electrochemical simulation.
+          </p>
+          <p style="color:var(--text-muted);line-height:1.8;">
+            The model treats the cell as a single thermal mass heated by resistive losses
+            (<em>I²R</em>) and cooled by convection. The internal resistance follows an Arrhenius
+            temperature dependence, making the governing ODE nonlinear. It was solved numerically in
+            Python using the <strong style="color:var(--text);">forward Euler method</strong>, with
+            an analytical solution (constant <em>I</em>, constant <em>R</em>) used to verify convergence.
+            Three aging metrics were then computed from the simulated temperature profile: peak temperature,
+            time above a safe threshold, and SEI calendar capacity loss.
+          </p>
+        </div>
+
+        <!-- ── WIDGET 1: Charging Explorer ── -->
+        <div class="widget-wrapper" style="margin-top:2.5rem;">
+          <div class="widget-title">Charging explorer</div>
+          <div class="widget-desc">
+            Set a C-rate and heat transfer coefficient, then run the simulation to see the current
+            profile, temperature curve, and aging metrics for a single charge.
+          </div>
+
+          <div id="pyodide-status-1" class="pyodide-status">
+            <span class="pyodide-spinner"></span>
+            <span id="pyodide-status-text-1">Loading simulation engine…</span>
+          </div>
+
+          <div class="widget-controls">
+            <div class="control-group">
+              <label for="crate-slider">C-rate</label>
+              <input type="range" id="crate-slider" min="0.1" max="5.0" step="0.1" value="1.0"
+                     oninput="document.getElementById('crate-val').textContent=parseFloat(this.value).toFixed(1)+'C'">
+              <span class="control-value" id="crate-val">1.0C</span>
+            </div>
+            <div class="control-group">
+              <label for="h-slider">Heat transfer coeff. <em>h</em></label>
+              <input type="range" id="h-slider" min="5" max="60" step="1" value="14"
+                     oninput="document.getElementById('h-val').textContent=this.value+' W/(m²·K)'">
+              <span class="control-value" id="h-val">14 W/(m²·K)</span>
+            </div>
+            <button class="btn btn-primary" id="run-btn-1" onclick="runWidget1()" disabled>Run</button>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;flex-wrap:wrap;" id="plots-1">
+            <div class="widget-plot" id="plot-current"></div>
+            <div class="widget-plot" id="plot-temp"></div>
+          </div>
+
+          <div class="widget-metrics" id="metrics-1" style="display:none;">
+            <div class="metric-card">
+              <div class="metric-value" id="metric-peak">—</div>
+              <div class="metric-label">Peak temperature (°C)</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metric-time">—</div>
+              <div class="metric-label">Time above 35°C (min)</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metric-aging">—</div>
+              <div class="metric-label">Calendar capacity loss</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── WIDGET 2: Aging sensitivity sweep ── -->
+        <div class="widget-wrapper" style="margin-top:1.5rem;">
+          <div class="widget-title">Aging vs charging rate</div>
+          <div class="widget-desc">
+            Sweep 40 C-rates from 0.1 to 5.0 and plot calendar capacity loss for up to four values
+            of the convective heat transfer coefficient <em>h</em>. Higher <em>h</em> means better
+            cooling — see how it changes the optimum charging rate.
+          </div>
+
+          <div id="pyodide-status-2" class="pyodide-status" style="display:none;">
+            <span class="pyodide-spinner"></span>
+            <span>Running sweep…</span>
+          </div>
+
+          <div class="widget-controls">
+            <div class="control-group" style="min-width:220px;">
+              <label>h values to compare (W/(m²·K))</label>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem;">
+                <label style="text-transform:none;letter-spacing:0;font-size:var(--text-sm);display:flex;align-items:center;gap:0.3rem;color:var(--text-muted);">
+                  <input type="checkbox" value="7"  id="h7"  checked style="accent-color:var(--accent);"> 7
+                </label>
+                <label style="text-transform:none;letter-spacing:0;font-size:var(--text-sm);display:flex;align-items:center;gap:0.3rem;color:var(--text-muted);">
+                  <input type="checkbox" value="14" id="h14" checked style="accent-color:var(--accent);"> 14
+                </label>
+                <label style="text-transform:none;letter-spacing:0;font-size:var(--text-sm);display:flex;align-items:center;gap:0.3rem;color:var(--text-muted);">
+                  <input type="checkbox" value="28" id="h28" checked style="accent-color:var(--accent);"> 28
+                </label>
+                <label style="text-transform:none;letter-spacing:0;font-size:var(--text-sm);display:flex;align-items:center;gap:0.3rem;color:var(--text-muted);">
+                  <input type="checkbox" value="56" id="h56" checked style="accent-color:var(--accent);"> 56
+                </label>
+              </div>
+            </div>
+            <button class="btn btn-primary" id="run-btn-2" onclick="runWidget2()" disabled>Run sweep</button>
+          </div>
+
+          <div class="widget-plot" id="plot-aging" style="height:340px;"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         OTHER PROJECTS
+    ════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-heading">Other projects</h2>
+        <div class="project-cards-grid">
+
+          <div class="project-card">
+            <span class="cv-badge" style="margin-bottom:0.75rem;">Award-winning · 2025</span>
+            <div class="project-card-title">Industrial plant for manufacturing ventilators</div>
+            <div class="project-card-desc" style="margin-top:0.5rem;">
+              Rapid prototyping of an optimised manufacturing plant design, proposed by Siemens and
+              executed using the Siemens Digital Enterprise Suite. Collaborated with a multidisciplinary
+              engineering team to produce a plant layout that won a competitive design award.
+            </div>
+          </div>
+
+          <div class="project-card">
+            <span class="cv-badge" style="margin-bottom:0.75rem;">Award-winning · 2024</span>
+            <div class="project-card-title">Line-following robot</div>
+            <div class="project-card-desc" style="margin-top:0.5rem;">
+              Built a robot around a Raspberry Pi microcontroller and optical sensors, programmed
+              in MicroPython. Iterated the navigation logic and mechanical design to achieve the
+              best lap time in a competitive event.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-name">Maisha Farzana</span>
+      <ul class="footer-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════════
+       PYODIDE + SIMULATION
+  ════════════════════════════════════════════════ -->
+  <script>
+  // ── Plotly theme helpers ──────────────────────────
+  const THEME = {
+    bg:      '#1a2435',
+    paper:   '#1a2435',
+    text:    '#dde4ef',
+    muted:   '#7a8fa8',
+    grid:    '#2a3a50',
+    accent:  '#f0b429',
+    colors:  ['#f0b429','#5ab4f5','#68d391','#fc8b8b'],
+  };
+
+  function plotLayout(xTitle, yTitle, extra) {
+    return Object.assign({
+      paper_bgcolor: THEME.paper,
+      plot_bgcolor:  THEME.bg,
+      font:   { color: THEME.text, family: 'Inter, sans-serif', size: 12 },
+      xaxis:  { title: xTitle, gridcolor: THEME.grid, zerolinecolor: THEME.grid, color: THEME.muted },
+      yaxis:  { title: yTitle, gridcolor: THEME.grid, zerolinecolor: THEME.grid, color: THEME.muted },
+      margin: { t: 20, r: 20, b: 50, l: 55 },
+      showlegend: false,
+    }, extra || {});
+  }
+
+  // ── Battery source (inlined so no fetch needed) ──
+  const BATTERY_PY = `
+from __future__ import annotations
+import numpy as np
+from dataclasses import dataclass
+
+@dataclass
+class Parameters:
+    charging_rate: float
+    m: float = 0.084
+    c: float = 1720.0
+    h: float = 14.0
+    A: float = 6.4e-3
+    T_amb: float = 298.15
+    s_CC: float = 0.92
+    tau: float = 1/10
+    alpha: float = 0.01
+    Q_nominal: float = 3.0
+    R0: float = 5.34e-2
+    R_T: float = 3.8e-16
+    E_A: float = 51510.0
+    R_gas: float = 8.314
+    k_ref: float = 3.694e-4
+    E_A_cal: float = 20600.0
+    alpha_ct: float = 0.384
+    F: float = 96485.0
+    U_a_ref: float = 0.123
+    k0: float = 0.142
+
+def resistance(T, params):
+    return params.R_T * np.exp(params.E_A / (params.R_gas * T)) + params.R0
+
+def euler_solve_battery(parameters, current_profile, dt=1/240, dynamic_resistance=True):
+    p = parameters
+    n = len(current_profile)
+    times = np.arange(n) * dt
+    temps = np.empty(n)
+    resists = np.empty(n)
+    T = p.T_amb
+    R = resistance(T, p)
+    for i, I in enumerate(current_profile):
+        temps[i] = T
+        resists[i] = R
+        dTdt = 3600.0 * (I**2 * R - p.h * p.A * (T - p.T_amb)) / (p.m * p.c)
+        T = T + dt * dTdt
+        if dynamic_resistance:
+            R = resistance(T, p)
+    return times, temps, resists
+
+def cc_cv_profile(C, Q_nominal, tau, dt=1/240, s_CC=0.8, alpha=0.05):
+    I0 = C * Q_nominal
+    I_F = alpha * Q_nominal
+    t_CC = s_CC / C
+    n_cc = max(1, int(round(t_CC / dt)))
+    t_cc_arr = np.arange(n_cc) * dt
+    i_cc = np.full(n_cc, I0)
+    if s_CC >= 1.0 or C <= alpha:
+        return t_cc_arr, i_cc
+    dt_cv = tau * np.log(C / alpha)
+    n_cv = max(1, int(np.ceil(dt_cv / dt)))
+    t_cv_arr = t_CC + np.arange(n_cv) * dt
+    i_cv = I0 * np.exp(-(t_cv_arr - t_CC) / tau)
+    mask = i_cv >= I_F
+    if mask.any():
+        t_cv_arr = t_cv_arr[mask]
+        i_cv = i_cv[mask]
+    return np.concatenate([t_cc_arr, t_cv_arr]), np.concatenate([i_cc, i_cv])
+
+def anode_potential(x_a):
+    return (0.6379 + 0.5416*np.exp(-305.5309*x_a)
+            + 0.044*np.tanh(-(x_a-0.1958)/0.1088)
+            - 0.1978*np.tanh((x_a-1.0571)/0.0854)
+            - 0.6875*np.tanh((x_a+0.0117)/0.0529)
+            - 0.0175*np.tanh((x_a-0.5692)/0.0875))
+
+def soc_profile(times, currents, Q_nominal):
+    dt = np.diff(times)
+    increments = 0.5*(currents[:-1]+currents[1:])*dt
+    return np.concatenate([[0.0], np.cumsum(increments)]) / Q_nominal
+
+def soc_stress_factor(s, params):
+    p = params
+    x_a = 0.0085 + s*0.7715
+    U_a = anode_potential(x_a)
+    return np.exp(p.alpha_ct*p.F/p.R_gas*(p.U_a_ref-U_a)/p.T_amb) + p.k0
+
+def aging_metric(times, temperatures, currents, parameters):
+    p = parameters
+    f_T = np.exp(-p.E_A_cal/p.R_gas*(1.0/temperatures - 1.0/p.T_amb))
+    s = soc_profile(times, currents, p.Q_nominal)
+    g_s = soc_stress_factor(s, p)
+    k = p.k_ref * f_T * g_s
+    rate = np.where(times > 0, k/(2.0*np.sqrt(times)), 0.0)
+    return float(np.trapezoid(rate, times))
+
+def run_single(C, h):
+    p = Parameters(charging_rate=C, h=h)
+    times, currents = cc_cv_profile(C, p.Q_nominal, p.tau, alpha=p.alpha)
+    _, temps, _ = euler_solve_battery(p, currents, dynamic_resistance=True)
+    peak = float(np.max(temps)) - 273.15
+    t_above = float(np.trapezoid(temps > 308.15, times)) * 60.0
+    aging = aging_metric(times, temps, currents, p)
+    return {
+        'times_min':    (times * 60).tolist(),
+        'currents':     currents.tolist(),
+        'temps_c':      (temps - 273.15).tolist(),
+        'peak_temp':    round(peak, 2),
+        't_above_35':   round(t_above, 2),
+        'aging':        float(f'{aging:.3e}'),
+    }
+
+def run_sweep(h_vals):
+    C_values = [round(0.1 + i*0.124, 3) for i in range(40)]
+    results = {}
+    for h in h_vals:
+        aging_list = []
+        for C in C_values:
+            p = Parameters(charging_rate=C, h=h)
+            times, currents = cc_cv_profile(C, p.Q_nominal, p.tau, alpha=p.alpha)
+            _, temps, _ = euler_solve_battery(p, currents, dynamic_resistance=True)
+            aging_list.append(aging_metric(times, temps, currents, p))
+        results[str(h)] = aging_list
+    return {'c_values': C_values, 'results': results}
+`;
+
+  // ── Pyodide bootstrap ────────────────────────────
+  let pyodide = null;
+  let pyodideReady = false;
+
+  async function initPyodide() {
+    try {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js';
+      document.head.appendChild(script);
+      await new Promise((res, rej) => { script.onload = res; script.onerror = rej; });
+
+      document.getElementById('pyodide-status-text-1').textContent = 'Loading NumPy…';
+      pyodide = await loadPyodide();
+      await pyodide.loadPackage('numpy');
+
+      document.getElementById('pyodide-status-text-1').textContent = 'Initialising model…';
+      await pyodide.runPythonAsync(BATTERY_PY);
+
+      pyodideReady = true;
+      document.getElementById('pyodide-status-1').style.display = 'none';
+      document.getElementById('run-btn-1').disabled = false;
+      document.getElementById('run-btn-2').disabled = false;
+    } catch(e) {
+      document.getElementById('pyodide-status-text-1').textContent = 'Failed to load simulation engine. Please refresh.';
+      console.error(e);
+    }
+  }
+
+  // ── Widget 1: single run ─────────────────────────
+  async function runWidget1() {
+    if (!pyodideReady) return;
+    const C = parseFloat(document.getElementById('crate-slider').value);
+    const h = parseFloat(document.getElementById('h-slider').value);
+
+    const btn = document.getElementById('run-btn-1');
+    btn.disabled = true;
+    btn.textContent = 'Running…';
+
+    try {
+      await pyodide.runPythonAsync(`_r1 = run_single(${C}, ${h})`);
+      const r = pyodide.globals.get('_r1').toJs({ dict_converter: Object.fromEntries });
+
+      const times    = r.times_min;
+      const currents = r.currents;
+      const temps    = r.temps_c;
+
+      // find CC/CV boundary (first time current drops > 2%)
+      const I0 = currents[0];
+      let cvStart = times.length;
+      for (let i = 1; i < currents.length; i++) {
+        if (currents[i] < I0 * 0.98) { cvStart = i; break; }
+      }
+
+      Plotly.newPlot('plot-current', [
+        { x: times.slice(0, cvStart), y: currents.slice(0, cvStart),
+          mode:'lines', line:{color:THEME.accent,width:2}, name:'CC phase' },
+        { x: times.slice(cvStart), y: currents.slice(cvStart),
+          mode:'lines', line:{color:THEME.colors[1],width:2,dash:'dot'}, name:'CV phase' },
+      ], plotLayout('Time (min)', 'Current (A)', { showlegend:true,
+          legend:{font:{color:THEME.text},bgcolor:'rgba(0,0,0,0)'} }), { responsive:true });
+
+      Plotly.newPlot('plot-temp', [
+        { x: times, y: temps, mode:'lines', line:{color:THEME.accent,width:2} },
+        { x: [times[0], times[times.length-1]], y:[35,35],
+          mode:'lines', line:{color:'#fc8b8b',width:1,dash:'dash'}, name:'35°C threshold' },
+      ], plotLayout('Time (min)', 'Temperature (°C)', { showlegend:true,
+          legend:{font:{color:THEME.text},bgcolor:'rgba(0,0,0,0)'} }), { responsive:true });
+
+      document.getElementById('metric-peak').textContent  = r.peak_temp.toFixed(1) + '°C';
+      document.getElementById('metric-time').textContent  = r.t_above_35.toFixed(1) + ' min';
+      document.getElementById('metric-aging').textContent = r.aging.toExponential(2);
+      document.getElementById('metrics-1').style.display = 'grid';
+
+    } catch(e) { console.error(e); }
+
+    btn.disabled = false;
+    btn.textContent = 'Run';
+  }
+
+  // ── Widget 2: sweep ──────────────────────────────
+  async function runWidget2() {
+    if (!pyodideReady) return;
+    const hVals = [7,14,28,56].filter(v => document.getElementById('h'+v).checked);
+    if (!hVals.length) return;
+
+    const btn = document.getElementById('run-btn-2');
+    btn.disabled = true;
+    btn.textContent = 'Running…';
+    document.getElementById('pyodide-status-2').style.display = 'flex';
+
+    try {
+      await pyodide.runPythonAsync(`_r2 = run_sweep([${hVals.join(',')}])`);
+      const r = pyodide.globals.get('_r2').toJs({ dict_converter: Object.fromEntries });
+
+      const cVals = r.c_values;
+      const traces = hVals.map((h, i) => ({
+        x: cVals,
+        y: r.results[String(h)],
+        mode: 'lines',
+        name: `h = ${h} W/(m²·K)`,
+        line: { color: THEME.colors[i], width: 2 },
+      }));
+
+      Plotly.newPlot('plot-aging', traces,
+        plotLayout('Charging rate (C)', 'Calendar capacity loss', {
+          showlegend: true,
+          legend: { font:{color:THEME.text}, bgcolor:'rgba(0,0,0,0)' },
+          yaxis: { type:'log', title:'Calendar capacity loss',
+                   gridcolor:THEME.grid, zerolinecolor:THEME.grid, color:THEME.muted },
+        }), { responsive:true });
+
+    } catch(e) { console.error(e); }
+
+    document.getElementById('pyodide-status-2').style.display = 'none';
+    btn.disabled = false;
+    btn.textContent = 'Run sweep';
+  }
+
+  // ── Start loading Pyodide immediately ────────────
+  initPyodide();
+  </script>
+
+</body>
+</html>

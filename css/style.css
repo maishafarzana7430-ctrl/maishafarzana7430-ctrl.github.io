@@ -322,6 +322,26 @@ a {
   font-weight: 600;
 }
 
+.about-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.about-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .about-layout { flex-direction: column; }
+  .about-photo  { width: 120px; height: 120px; }
+}
+
 .about-hobbies {
   margin-top: 0.5rem;
   padding-top: 1.25rem;
