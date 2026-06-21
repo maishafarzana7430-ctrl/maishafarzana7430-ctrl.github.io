@@ -469,7 +469,7 @@ def run_sweep(h_vals):
         plotLayout('Charging rate (C)', 'Calendar capacity loss', {
           showlegend: true,
           legend: { font:{color:THEME.text}, bgcolor:'rgba(0,0,0,0)' },
-          yaxis: { type:'log', title:'Calendar capacity loss',
+          yaxis: { type:'log', title:{ text:'Calendar capacity loss', standoff:18 },
                    gridcolor:THEME.grid, zerolinecolor:THEME.grid, color:THEME.muted },
         }), { responsive:true });
 
